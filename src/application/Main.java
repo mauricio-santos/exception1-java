@@ -43,17 +43,12 @@ public class Main {
             System.out.print("Check-out date (dd/MM/yyyy): ");
             checkOut = sdf.parse(sc.next());
 
-            //Verificando se as reservas possuem uma data futura
-            Date Now = new Date(); //criando uma data como hora e data atual
-            if (checkIn.before(Now) || checkOut.before(Now)) {
-                System.out.println("Error in reservation: Reservation dates for update must be future dates");
-            } else if (!checkOut.after(checkIn)) {
-                System.out.println("Error in reservation: Check-out date must be after check-in date");
-            } else {
-                client.updateDates(checkIn, checkOut);
-                System.out.println(client);
-            }
-
+                String error = client.updateDates(checkIn, checkOut);
+                if (error != null){
+                    System.out.println(error);
+                }else{
+                    System.out.println(client);
+                }
             sc.close();
         }
     }
